@@ -10,14 +10,6 @@ def get_session_data(year, event_name, session_type):
     session.load()
     return session.results
 
-# def get_weekend_data(year, event):
-#     sessions = ['Q', 'R']
-#     for session_type in sessions:
-#         result = get_session_data(year, event["EventName"], session_type)
-#         save_session_results(year, event["EventName"], session_type, event["RoundNumber"], event["Location"], result)
-#         event_name = event["EventName"]
-#         print(f"Saved {session_type} for {event_name}")
-
 def get_weekend_data(year, event):
     for session_type in ["Q", "R"]:
         if has_session_results(year, event["RoundNumber"], session_type):
