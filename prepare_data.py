@@ -16,5 +16,8 @@ def seperate_race_and_quali(df):
     return merged
 
 if __name__ == "__main__":
-    data = seperate_race_and_quali(join_data())
-    print(data.head(20))
+    df = join_data()   
+    print(
+    df.groupby("year")["round_number"]
+    .nunique()
+    )    

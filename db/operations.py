@@ -38,5 +38,25 @@ def save_session_results(year, event_name, session_type, round_number, location,
         print("Data has been saved to db")
 
 
+def has_session_results(year, round_number, session_type):
+    session = Session()
+    with session:
+        result_id = session.scalar(
+            select(SessionResult.id)
+            .join(
+                RaceSession,
+                SessionResult.race_session_id == RaceSession.id
+            )
+            .where(
+                RaceSession.year == int(year),
+                RaceSession.round_number == int(round_number),
+                RaceSession.session_type == session_type
+            )
+            .limit(1)
+        )
+
+        return result_id is not None
+
+
 #if __name__ == "__main__":
 #     save_session_results(2025, "Japanese Grand Prix", "R", 4, "Suzuka", None)
